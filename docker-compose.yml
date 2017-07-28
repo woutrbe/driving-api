@@ -9,6 +9,9 @@ services:
     depends_on:
       - mongodb
       - rabbitmq
+    links:
+      - mongodb
+      - rabbitmq
     environment:
       "MONGO_URI": "mongodb"
       # "MONGO_USER": ""
@@ -16,7 +19,7 @@ services:
       "MONGO_DB": "driving"
       "RABBIT_USER": "root"
       "RABBIT_PASS": "root"
-      "RABBIT_PORT": 5673
+      "RABBIT_URI": "rabbitmq"
     ports:
       - 2323:8080
     restart: always

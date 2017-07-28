@@ -2,6 +2,7 @@
 
 ## Prerequisites
 * Docker
+* Node.js >= v6.9.1 (For local dev without docker only)
 
 ## Getting started
 ```
@@ -17,8 +18,11 @@ docker-compose up
 
 After running `docker-compose up`, you should have 3 docker images running:
 * driving-api
+* driving-worker
 * mongodb
 * rabbitmq
+
+By default, the API will be exposed to port `2323`, you can change this in the `docker.compose.yml` file.
 
 # Challenge
 
