@@ -9,5 +9,7 @@ RUN npm install --production
 COPY lib /src/lib
 COPY pm2.yml /src/pm2.yml
 
+EXPOSE 8080
+
 # Start
 CMD ["pm2-dev", "pm2.yml"]

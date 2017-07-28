@@ -23,7 +23,7 @@
     "good": "^7.2.0",
     "hapi": "^16.5.0",
     "joi": "^10.6.0",
-    "mongoose": "^4.11.4"
+    "mongoose": "^4.10.8"
   },
   "devDependencies": {
     "eslint": "^4.3.0",
