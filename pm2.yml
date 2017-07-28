@@ -1,0 +1,11 @@
+apps:
+  - script: lib/server/index.js
+    name: api
+    watch:
+      - lib
+    ignore_watch:
+      - tests
+  # - script: lib/worker/index.js
+  #   name: worker
+  #   exec_mode: cluster
+  #   instances: 5
