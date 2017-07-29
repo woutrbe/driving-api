@@ -1,0 +1,8 @@
+apps:
+  - script: lib/worker/index.js
+    name: worker
+    watch:
+      - lib
+    ignore_watch:
+      - tests
+      - lib/server

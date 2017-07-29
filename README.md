@@ -24,7 +24,20 @@ After running `docker-compose up`, you should have 3 docker images running:
 
 By default, the API will be exposed to port `2323`, you can change this in the `docker.compose.yml` file.
 
-# Challenge
+## API
+The API will expose two endpoints:
+
+`POST /route`
+
+`GET /route/:id`
+
+## Worker
+The worker is responsible for talking to the Google Maps API and calculation driving distances. For the purpose of this test, it will only store the fast distance.
+It might be better to store all results in the future.
+
+It will process messages from the `routes` queue in RabbitMQ.
+
+## Challenge
 
 Build an API to calculate shortest driving path and estimated driving time to visit all specified locations, starting from the first in the list.  
 Note that we expect shortest **driving** distance (and estimated travel time), so you may want to use [Google Maps API](https://developers.google.com/maps/)  

@@ -4,12 +4,12 @@ WORKDIR /src
 
 # Install dependencies
 COPY package.json /src/package.json
-RUN npm install --production
+RUN npm install
 
 COPY lib /src/lib
-COPY pm2.yml /src/pm2.yml
+COPY pm2.api.yml /src/pm2.api.yml
 
 EXPOSE 8080
 
 # Start
-CMD ["pm2-dev", "pm2.yml"]
+CMD ["pm2-dev", "pm2.api.yml"]

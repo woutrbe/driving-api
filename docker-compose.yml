@@ -13,13 +13,8 @@ services:
       - mongodb
       - rabbitmq
     environment:
-      "MONGO_URI": "mongodb"
-      # "MONGO_USER": ""
-      # "MONGO_PASS": ""
-      "MONGO_DB": "driving"
-      "RABBIT_USER": "root"
-      "RABBIT_PASS": "root"
-      "RABBIT_URI": "rabbitmq"
+      "MONGO_URI": "mongodb://mongodb/driving"
+      "RABBIT_URI": "amqp://root:root@rabbitmq"
     ports:
       - 2323:8080
     restart: always
@@ -27,25 +22,20 @@ services:
       - ./lib/:/src/lib/
 
   # Worker container, running multiple workers for retrieving directions
-  # worker:
-  #   container_name: driving-worker
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile-worker
-  #   depends_on:
-  #     - mongodb
-  #     - rabbitmq
-  #   environment:
-  #     "MONGO_URI": "mongodb"
-  #     # "MONGO_USER": ""
-  #     # "MONGO_PASS": ""
-  #     "MONGO_DB": "driving"
-  #     "RABBIT_USER": "root"
-  #     "RABBIT_PASS": "root"
-  #     "RABBIT_PORT": 5673
-  #   restart: always
-  #   volumes:
-  #     - ./lib/:/src/lib/
+  worker:
+    container_name: driving-worker
+    build:
+      context: .
+      dockerfile: Dockerfile-worker
+    depends_on:
+      - mongodb
+      - rabbitmq
+    environment:
+      "MONGO_URI": "mongodb://mongodb/driving"
+      "RABBIT_URI": "amqp://root:root@rabbitmq"
+    restart: always
+    volumes:
+      - ./lib/:/src/lib/
 
   # MongDB
   mongodb:
