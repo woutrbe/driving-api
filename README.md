@@ -24,8 +24,13 @@ After running `docker-compose -f docker-compose.dev.yml up`, you should have 3 d
 
 By default, the API will be exposed to port `2323`, you can change this in the `docker.compose.yml` file.
 
+## Tests
+After starting the Docker containers, run `npm test` in the work directory locally.
+
 ## Production build
 To create a production ready build, run `docker-compose -f docker-compose.prod.yml up`.
+
+The production build is slightly different because it will start the node services without the watch command enabled.
 
 ## API
 The API will expose two endpoints:
