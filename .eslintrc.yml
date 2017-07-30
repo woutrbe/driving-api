@@ -8,3 +8,4 @@ rules:
   arrow-parens: 0
   max-len: 0
   arrow-body-style: 0
+  class-methods-use-this: 0

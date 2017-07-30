@@ -1,0 +1,15 @@
+FROM keymetrics/pm2-docker-alpine:latest
+
+WORKDIR /src
+
+# Install dependencies
+COPY package.json /src/package.json
+RUN npm install
+
+COPY lib /src/lib
+COPY pm2.api.yml /src/pm2.api.yml
+
+EXPOSE 8080
+
+# Start
+CMD ["pm2-docker", "pm2.api.yml"]

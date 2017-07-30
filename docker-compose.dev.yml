@@ -1,0 +1,64 @@
+version: '3'
+services:
+  # Web container, only running api
+  web:
+    container_name: driving-api
+    build:
+      context: .
+      dockerfile: Dockerfile-api.dev
+    depends_on:
+      - mongodb
+      - rabbitmq
+    links:
+      - mongodb
+      - rabbitmq
+    environment:
+      "MONGO_URI": "mongodb://mongodb/driving"
+      "RABBIT_URI": "amqp://root:root@rabbitmq"
+    ports:
+      - 2323:8080
+    restart: always
+    volumes:
+      - ./lib/:/src/lib/
+
+  # Worker container, running multiple workers for retrieving directions
+  worker:
+    container_name: driving-worker
+    build:
+      context: .
+      dockerfile: Dockerfile-worker.dev
+    depends_on:
+      - mongodb
+      - rabbitmq
+    environment:
+      "MONGO_URI": "mongodb://mongodb/driving"
+      "RABBIT_URI": "amqp://root:root@rabbitmq"
+      "GOOGLE_KEY": "AIzaSyDGJM2Z43dE2p0q3WL1fxUyx4S38jd2MXk"
+    restart: always
+    volumes:
+      - ./lib/:/src/lib/
+
+  # MongDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - mongo:/data/db
+    ports:
+      - 27018:27017
+    restart: always
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      "RABBITMQ_DEFAULT_USER": "root"
+      "RABBITMQ_DEFAULT_PASS": "root"
+    ports:
+      - 15673:15672
+      - 5673:5672
+    restart: always
+
+volumes:
+  mongo:

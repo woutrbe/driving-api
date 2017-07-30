@@ -1,6 +1,6 @@
 const supertest = require('supertest');
 
-const API = 'http://localhost:8080';
+const API = 'http://localhost:2323';
 
 describe('POST /route', () => {
 	let request;
@@ -61,18 +61,6 @@ describe('GET /token/:id', () => {
 
 	beforeAll(() => {
 		request = supertest(API);
-	});
-	
-	it('should be available', () => {
-		return request
-			.get('/route/asdf')
-			.expect(200);
-	});
-
-	it('should return 200', () => {
-		return request
-			.get('/route/asdf')
-			.expect(200);
 	});
 
 	it('should return an error without ID', () => {

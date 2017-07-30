@@ -3,9 +3,9 @@ services:
   # Web container, only running api
   web:
     container_name: driving-api
-    build: 
+    build:
       context: .
-      dockerfile: Dockerfile-api
+      dockerfile: Dockerfile-api.prod
     depends_on:
       - mongodb
       - rabbitmq
@@ -26,13 +26,14 @@ services:
     container_name: driving-worker
     build:
       context: .
-      dockerfile: Dockerfile-worker
+      dockerfile: Dockerfile-worker.prod
     depends_on:
       - mongodb
       - rabbitmq
     environment:
       "MONGO_URI": "mongodb://mongodb/driving"
       "RABBIT_URI": "amqp://root:root@rabbitmq"
+      "GOOGLE_KEY": "AIzaSyDGJM2Z43dE2p0q3WL1fxUyx4S38jd2MXk"
     restart: always
     volumes:
       - ./lib/:/src/lib/
