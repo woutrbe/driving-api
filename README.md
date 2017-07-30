@@ -1,5 +1,14 @@
 # Driving API
 
+## Notes
+For the sake of this test, all source code is in a single repo. While this is production ready, I would normally split it up into two different repos and use shared libraries.
+
+Both the `api` and `worker` run in a Docker container with pm2, making it easy to scale. Especially for the worker it's pretty straight forward to add more processes within the same container. (As it's not very memory intensive)
+
+While this solution works and will probably be able to handle high amounts of requests, a better architecture might be to use AWS SQS and AWS Lambda, which will take care of scaling automaticly.
+
+The API is a simple hapi server, easy to scale, but might need nginx in front of it.
+
 ## Prerequisites
 * Docker
 * Node.js >= v6.9.1 (For local dev without docker only)
